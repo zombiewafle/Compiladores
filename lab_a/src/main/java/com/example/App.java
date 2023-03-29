@@ -1,0 +1,97 @@
+package com.example;
+
+import java.util.Scanner;
+
+import com.example.Clasess.Conversion;
+import com.example.Clasess.Simplifier;
+import com.example.Clasess.DFA;
+import com.example.Clasess.NFA;
+import com.example.Clasess.NFAtoDFA;
+import com.example.Clasess.RegexToDFA;
+import com.example.Clasess.Graph;
+
+
+public class App 
+{
+    /**
+     * @param args
+     */
+    public static void main( String[] args ){
+        boolean exit = false;
+        System.out.println("Welcome to the Thompson-Algorithm Implementation in Java....\n");
+        System.setProperty("org.graphstream.ui", "swing");
+
+        try (Scanner sc1 = new Scanner(System.in)) {
+            while(exit != true && !Simplifier.isBalanced){
+                System.out.println("----- ----- ----- ----- ----- ----- ----- -----\nPlease select one of the options in the menu: \n1. NFA \n2. NFA to DFA \n3. Direct DFA \n4. Minimized DFA  \n5. Exit\n ----- ----- ----- ----- ----- ----- ----- -----");
+                String in = sc1.nextLine();
+
+                switch(in){
+                    case "1": //NFA 
+                        Scanner scNFA = new Scanner(System.in);
+                        System.out.println("Please enter a valid regex: ");
+                        String inputNFA = scNFA.nextLine();
+                        Simplifier simplifier = new Simplifier(inputNFA);
+                        //in = sc.nextLine();
+            
+                        Conversion conv = new Conversion(simplifier.toString());
+                        String postfix = conv.Converter(); 
+                        NFA nfa = new NFA(postfix);
+                        nfa.thompsonAlgotithm();
+                        String tBlock = """
+                                                NFA
+                            ----- ----- ----- ----- ----- ----- ----- -----
+                                Postfix: %s
+                                Symbols: %s
+                                Start State: %s
+                                End State: %s
+                                Transitions: %s
+                            ----- ----- ----- ----- ----- ----- ----- -----
+                                """.formatted(postfix, NFA.SymbolGetting(), NFA.getStartNodesList(), NFA.getEndtNodesList(), NFA.getTransitions());
+                        
+                        System.out.println(tBlock);
+            
+                        Graph.multiGraph.setAttribute("ui.stylesheet", "url('/home/zombiewafle/Documentos/lab_a/src/main/java/com/example/Clasess/styles.css')");
+                        Graph.NFAgraphConstruction();
+                        break;
+
+                    case "2": //NFA to DFA
+                        NFAtoDFA dfa = new NFAtoDFA();
+                        dfa.TransitionsGenerator();
+                        
+                        break;
+
+                    case "3": //Direct DFA
+                        Scanner scDdfa = new Scanner(System.in);
+                        System.out.println("Please enter a valid regex: ");
+                        String inputDdfa = scDdfa.nextLine();
+                        Simplifier simplifierDdfa = new Simplifier(inputDdfa);
+                        //in = sc.nextLine();
+                    
+                        Conversion convDdfa = new Conversion(simplifierDdfa.toString());
+                        String postfixDdfa = convDdfa.Converter();  
+
+                        RegexToDFA rtd = new RegexToDFA(postfixDdfa);
+                        rtd.treeCreation();
+                        break;
+
+                    case "4": //Minimized DFA
+                        // Scanner scDFAdir = new Scanner(System.in);
+                        // System.out.println("Please enter a valid regex: ");
+                        // String iDFAdir = scDFAdir.nextLine();
+                        // Simplifier simpDFAdir = new Simplifier(iDFAdir);
+                        // //in = sc.nextLine();                        
+                        break; 
+
+                    case "5": //Exit
+                        System.out.println("Bye!");
+                        return;
+
+                    default:
+                        System.out.println("Please enter a valid regex: ");
+                        break;
+                }
+            }
+        }
+    }
+}
