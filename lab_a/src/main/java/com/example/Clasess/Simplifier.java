@@ -175,7 +175,7 @@ public class Simplifier {
                             String parenthesis = (String) reg.substring(j, i); //The substring of the elemnts inside of the parenthesis
                             String a = (String) reg.substring(i+1); //From the last point till the end of the expression
                             //String simplified = b + "(" + parenthesis + "|ε)" + a;
-                            String simplified = b  + parenthesis + "." + parenthesis + "*" + a; //All the elements are concatenaded in one String
+                            String simplified = b  + parenthesis + "•" + parenthesis + "*" + a; //All the elements are concatenaded in one String
                             //nParenthesisHandler(simplified);
                             //System.out.println(simplified);
                             reg = simplified;

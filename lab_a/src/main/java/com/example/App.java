@@ -1,13 +1,13 @@
 package com.example;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.example.Clasess.Conversion;
 import com.example.Clasess.Simplifier;
-import com.example.Clasess.DFA;
+import com.example.Clasess.DFA.DirectDfa;
+import com.example.Clasess.Tokens.Token;
 import com.example.Clasess.NFA;
-import com.example.Clasess.NFAtoDFA;
-import com.example.Clasess.RegexToDFA;
 import com.example.Clasess.Graph;
 
 
@@ -33,7 +33,7 @@ public class App
                         String inputNFA = scNFA.nextLine();
                         Simplifier simplifier = new Simplifier(inputNFA);
                         //in = sc.nextLine();
-            
+                        
                         Conversion conv = new Conversion(simplifier.toString());
                         String postfix = conv.Converter(); 
                         NFA nfa = new NFA(postfix);
@@ -56,9 +56,26 @@ public class App
                         break;
 
                     case "2": //NFA to DFA
-                        NFAtoDFA dfa = new NFAtoDFA();
-                        dfa.TransitionsGenerator();
+                        // System.out.println(NFA.getTransitions());
+                        // System.out.println(NFA.SymbolGetting());
+                      /*   System.out.println(NFA.getiNodesList());
+                        // System.out.println(NFA.getfNodeslist());
+                        NewDFATransitions ntransitions = new NewDFATransitions(NFA.getTransitions(),NFA.SymbolGetting(), NFA.getiNodesList(), NFA.getfNodeslist());
+                        // dfa = new DFA(transformation.getDfaTable(), transformation.getDfaStates(),transformation.getDfaStatesWithNumbering(),transformation.getSymbolList());
+                        //dfaMap == dfaTable, dfaStates == states, withnumbering == getDfaNodes
+                        DirectDFA dDFA = new DirectDFA(ntransitions.getDfaMap(), ntransitions.getStates() , ntransitions.getDfaNodes(), ntransitions.getSymbols());
                         
+                        String block = """
+                                                NFA
+                            ----- ----- ----- ----- ----- ----- ----- -----
+                                Start State: %s
+                                End State: %s
+                                Transitions: %s
+                            ----- ----- ----- ----- ----- ----- ----- -----
+                                """.formatted(dDFA.getInitialStates(), dDFA.getFinalStates(),dDFA.getTransitionsList());
+                        
+                        System.out.println(block); */
+
                         break;
 
                     case "3": //Direct DFA
@@ -69,10 +86,11 @@ public class App
                         //in = sc.nextLine();
                     
                         Conversion convDdfa = new Conversion(simplifierDdfa.toString());
-                        String postfixDdfa = convDdfa.Converter();  
-
-                        RegexToDFA rtd = new RegexToDFA(postfixDdfa);
-                        rtd.treeCreation();
+                        String postfixDdfa = convDdfa.Converter();
+                        DirectDfa dDFA = new DirectDfa(postfixDdfa);
+                        System.out.println(dDFA.getNodesList());
+                        // DirectDfa.printTree(dDFA.getNodesList());
+                        // DirectDFA dfa = new DirectDFA()
                         break;
 
                     case "4": //Minimized DFA
@@ -83,10 +101,17 @@ public class App
                         // //in = sc.nextLine();                        
                         break; 
 
-                    case "5": //Exit
+                    case "5":
+                        // FileReaderLexer freader = new FileReaderLexer("/home/zombiewafle/Documentos/lab_a/src/main/java/com/example/Clasess/Tokens/slr.yal");
+                        
+                        break;
+                        
+
+                    case "6": //Exit
                         System.out.println("Bye!");
                         return;
 
+                    
                     default:
                         System.out.println("Please enter a valid regex: ");
                         break;

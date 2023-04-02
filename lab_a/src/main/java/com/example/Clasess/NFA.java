@@ -121,7 +121,7 @@ public class NFA {
 
             switch(c){
 
-                case '.':
+                case '•':
                     center = stack.pop();
                     
                     Node lNode = stack.pop();
@@ -219,6 +219,14 @@ public class NFA {
         }
     
         return transitions;
+    }
+
+    public static List<Node> getfNodeslist () {
+        return endtNodesList;
+    }
+
+    public static List<Node> getiNodesList () {
+        return startNodesList;
     }
     
        

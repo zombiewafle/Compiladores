@@ -55,8 +55,8 @@ public class Transition {
         this.initialState = new Node(NFA.ID);
         this.finalState = new Node(NFA.ID);
 
-        DFA.dfaNodes.add(initialState);
-        DFA.dfaNodes.add(finalState);
+        // DFA.dfaNodes.add(initialState);
+        // DFA.dfaNodes.add(finalState);
 
         this.initialState.addNextState(finalState);
         this.finalState.addPreviousState(initialState);

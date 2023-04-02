@@ -1,5 +1,6 @@
 package com.example.Clasess;
 
+import java.util.HashSet;
 // import java.util.HashMap;
 // import java.util.HashSet;
 import java.util.LinkedList;
@@ -17,6 +18,9 @@ public class Node {
     public List<Node> nextStatesList;
     public List<Node> previousStatesList;
 
+    public Set<Node> nextSetNodes;
+    public Set<Node> previousSetNodes;
+
     private Boolean start;
     private Boolean end;
 
@@ -31,6 +35,8 @@ public class Node {
         this.ID =  fID++;
         this.previousStatesList = new LinkedList<Node>();
         this.nextStatesList = new LinkedList<Node>();
+        this.nextSetNodes = new HashSet<>();
+        this.previousSetNodes = new HashSet<>();
         this.end = false;
         this.start = false;
     }
@@ -38,6 +44,8 @@ public class Node {
     public Node(Integer ID, String symbol /*, Character symbol*/){
         this.ID =  fID++;
         this.STID = symbol;
+        this.nextSetNodes = new HashSet<>();
+        this.previousSetNodes = new HashSet<>();
         this.previousStatesList = new LinkedList<Node>();
         this.nextStatesList = new LinkedList<Node>();
         this.end = false;
@@ -48,6 +56,8 @@ public class Node {
         this.ID =  fID++;
         this.previousStatesList = new LinkedList<Node>();
         this.nextStatesList = new LinkedList<Node>();
+        this.nextSetNodes = new HashSet<>();
+        this.previousSetNodes = new HashSet<>();
         this.end = false;
         this.start = false;
     }
@@ -56,6 +66,8 @@ public class Node {
         this.ID = fID++;
         this.previousStatesList = new LinkedList<Node>();
         this.nextStatesList = new LinkedList<Node>();
+        this.nextSetNodes = new HashSet<>();
+        this.previousSetNodes = new HashSet<>();
         this.end = false;
         this.start = false;
     }
@@ -64,11 +76,25 @@ public class Node {
         this.ID = fID++;
         this.previousStatesList = new LinkedList<Node>();
         this.nextStatesList = new LinkedList<Node>();
+        this.nextSetNodes = new HashSet<>();
+        this.previousSetNodes = new HashSet<>();
         this.end = false;
         this.start = false;
     }
 
     
+    public Node(int currStateListID, boolean b) {
+        this.ID = fID++;
+        this.previousStatesList = new LinkedList<>();
+        this.nextStatesList = new LinkedList<>();
+    }
+
+    /* public State(int stateId, boolean dfa) {
+        this.stateId = stateId;
+        this.previousStates = new LinkedList<>();
+        this.nextStates = new LinkedList<>();
+    } */
+
     //#region Getters and setters 
     public Integer getDfaIDF() {
         return dfaIDF;
@@ -113,6 +139,23 @@ public class Node {
 
     public List<Node> getNextStatesList() {
         return nextStatesList;
+    }
+
+    public Set<Node> getNextNodesSet() {
+        return nextSetNodes;
+    }
+
+    public Set<Node> getPreviousNodesSet() {
+        return previousSetNodes;
+    }
+    
+
+    public void setNextSetNodes(Set<Node> nextSetNodes) {
+        this.nextSetNodes = nextSetNodes;
+    }
+
+    public void setPreviousSetNodes(Set<Node> previousSetNodes) {
+        this.previousSetNodes = previousSetNodes;
     }
 
     public void setNextStatesList(List<Node> nextStatesList) {

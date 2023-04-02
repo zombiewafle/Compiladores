@@ -18,7 +18,7 @@ public class Conversion {
         Map<Character, Integer> map = new HashMap<Character, Integer>();
         map.put('(', 1);
         map.put('|', 2);
-        map.put('.', 3); // explicit concatenation operator
+        map.put('•', 3); // explicit concatenation operator
         map.put('?', 4);
         map.put('*', 4);
         map.put('+', 4);
@@ -143,7 +143,7 @@ public class Conversion {
 
                 //After going through the regex, we will need to check that we're going to put a . between two valid symbols
                 if (c1 != '(' && c2 != ')' && !operators.contains(c2) && !bOperators.contains(c1)){
-                    postfix += '.';
+                    postfix += '•';
                 }
             }
         }
